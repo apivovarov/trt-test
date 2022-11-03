@@ -28,7 +28,6 @@ for i in range(N):
   y = ff(x)
 
 N = 1000
-t1 = time.time()
 TTT=[]
 for i in range(N):
   t10 = time.time()
@@ -37,13 +36,13 @@ for i in range(N):
   t11 = time.time() - t10
   TTT.append(t11)
 
-ttt = time.time() - t1
 print("-----------------------------------", MODEL, "--------------------")
-print("exec time (sec):", ttt)
-print("AVG (fps)", batch*N/ttt)
-p50_time = np.percentile(TTT, 50) * 1000 / batch
+avg_time = np.mean(TTT) / batch
+p50_time = np.percentile(TTT, 50) / batch
+print("AVG (ms)", avg_time)
+print("AVG (fps)", 1/avg_time)
 print("P50 (ms):", p50_time)
-print("P50 (fps):", 1000/p50_time)
+print("P50 (fps):", 1/p50_time)
 #print("GPU Mem usage:", tf.config.experimental.get_memory_info('GPU:0'))
 print("--------------------------------------------------------------------------")
 #print(TTT)
